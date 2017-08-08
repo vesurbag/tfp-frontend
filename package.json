@@ -1,0 +1,41 @@
+{
+  "name": "tfp-frontend",
+  "version": "1.0.0",
+  "description": "TFP Client",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vesurbag/tfp-frontend.git"
+  },
+  "author": "vesurbag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vesurbag/tfp-frontend/issues"
+  },
+  "homepage": "https://github.com/vesurbag/tfp-frontend#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "mobx": "^3.2.2",
+    "mobx-preact": "^0.3.1",
+    "preact": "^8.2.1",
+    "preact-router": "^2.5.5",
+    "tslib": "^1.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.19",
+    "awesome-typescript-loader": "^3.2.2",
+    "css-loader": "^0.28.4",
+    "html-webpack-plugin": "^2.30.1",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "postcss-loader": "^2.0.6",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.18.2",
+    "typescript": "^2.4.2",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
+  }
+}

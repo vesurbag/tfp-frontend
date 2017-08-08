@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "declaration": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "importHelpers": true,
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+    "pretty": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./src"
+  },
+  "include": [
+    "src/core/**/*",
+    "typings/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
