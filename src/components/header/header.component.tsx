@@ -1,5 +1,3 @@
-import { h, Component } from 'preact'
-
 interface Props {
 
 }

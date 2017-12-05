@@ -1,5 +1,3 @@
-import { h, Component } from 'preact'
-
 import { Header } from 'components/header'
 
 interface Props {
@@ -11,7 +9,8 @@ export class HomePage extends Component<Props, {}> {
         return (
             <div>
                 <Header />
-                <a href='registration'>Reg</a>
+                <Link to='registration'>Register</Link>
+                <Link to='login'>Login</Link>
             </div>
         )
     }

@@ -1,16 +1,32 @@
+import '../globals'
 import 'tslib'
 
-import { h, Component } from 'preact'
 import { AppRouter } from 'core/router'
+import { UserStore } from 'core/user'
 
 interface Props {
 
 }
 
 export class App extends Component<Props, {}> {
+    private stores: {
+        user: UserStore
+    }
+
+    constructor(props: Props) {
+        super(props)
+
+        const user = new UserStore()
+
+        this.stores = { user }
+    }
+
     render() {
         return (
-            <AppRouter />
+            <Provider {...this.stores}>
+                <AppRouter />
+            </Provider>
+
         )
     }
 }

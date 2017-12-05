@@ -1,17 +1,18 @@
-import { h, Component } from 'preact'
-import Router from 'preact-router'
+import { Switch, Route } from 'react-router-dom'
 
 import { HomePage } from 'pages/home'
-import { RegistrationRouter } from './registration.router'
+import { RegistrationPage } from 'pages/registration'
+import { LoginPage } from 'pages/login'
 
 export class AppRouter extends Component<{}, {}> {
 
     render() {
         return (
-            <Router>
-                <HomePage path='/' />
-                <RegistrationRouter path='/registration/:*' />
-            </Router>
+            <Switch>
+                <Route exact path='/' component={HomePage} />
+                <Route path='/registration' component={RegistrationPage} />
+                <Route path='/login' component={LoginPage} />
+            </Switch>
         )
     }
 }

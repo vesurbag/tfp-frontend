@@ -4,7 +4,6 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "jsx": "react",
-    "jsxFactory": "h",
     "declaration": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -18,10 +17,13 @@
     "baseUrl": "./src"
   },
   "include": [
-    "src/core/**/*",
-    "typings/*"
+    "typings/*",
+    "src/core/**/*"
   ],
   "exclude": [
     "node_modules"
+  ],
+  "files": [
+    "typings/lib.d.ts"
   ]
 }

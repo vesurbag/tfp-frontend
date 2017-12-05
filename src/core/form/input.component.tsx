@@ -1,27 +1,30 @@
-import { h, Component } from 'preact'
-
 import { Field } from './field.model'
 
 interface Props {
     field: Field
+    label: string
     type?: string
 }
 
+@observer
 export class Input extends Component<Props, {}> {
     render() {
-        const { field } = this.props
+        const { field, label, type } = this.props
 
         return (
-            <input
-                type='text'
-                value={field.value}
-                onChange={
-                    (event: any) => {
-                        event.preventDefault()
-                        field.value = event.target.value
+            <div>
+                <label>{label}</label>
+                <input
+                    type={type || 'text'}
+                    value={field.value}
+                    onChange={
+                        (event: any) => {
+                            event.preventDefault()
+                            field.value = event.currentTarget.value
+                        }
                     }
-                }
-            />
+                />
+            </div>
         )
     }
 }
