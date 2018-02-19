@@ -1,62 +1,71 @@
 import { Input, Field } from 'core/form'
 import { UserStore } from 'core/user'
-import { http } from 'core/http'
-import { IRegistration } from './registration'
+import { IRegistrationFields } from './fields'
+import { RegistrationForm } from './form'
+import { validators } from 'core/form'
 
 interface Props {
-    path?: string
-    user?: UserStore
+  user?: UserStore
 }
 
 @observer
 export class Registration extends Component<Props, {}> {
-    data: IRegistration
-    @observable error: string
+  fields: IRegistrationFields
+  form: RegistrationForm
+  @observable error: string
 
-    constructor(props: Props) {
-        super(props)
+  constructor(props: Props) {
+    super(props)
 
-        this.data = {
-            name: new Field(),
-            email: new Field(),
-            username: new Field(),
-            password: new Field()
-        }
-        this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentWillMount() {
+    const { maxLength, minLength, required, compared } = validators
+    this.fields = {
+      firstName: new Field(required(), minLength(2)),
+      lastName: new Field(required(), minLength(5), maxLength(25)),
+      email: new Field(required()),
+      password: new Field(required()),
+      confirmPassword: new Field(required()),
     }
+    this.fields.confirmPassword.validators.push(
+      compared(this.fields.password, 'Пароли не совпадают')
+    )
 
-    handleSubmit(event: any) {
-        event.preventDefault()
-        const data = {
-            name: this.data.name.value,
-            email: this.data.email.value,
-            username: this.data.username.value,
-            password: this.data.password.value
-        }
+    this.form = new RegistrationForm(this.fields)
+  }
 
-        http.post('users/register', data)
-            .then(resp => {
-                if (resp.data.success) {
+  async handleSubmit(event: any) {
+    event.preventDefault()
+    const isSuccess = await this.form.submit()
+    console.log(isSuccess)
+  }
 
-                } else {
-                    this.error = resp.data.msg
-                }
-            })
-            .catch(error => console.error(error))
-    }
+  render() {
+    const { firstName, lastName, email, password, confirmPassword } = this.fields
 
-    render() {
-        const { name, email, username, password } = this.data
+    return (
+      <div className="block">
+        <div className="reg__wrapper">
+          <form className="reg__form" onSubmit={this.handleSubmit}>
+            {this.error}
+            <Input label="Имя" field={firstName} />
+            <Input label="Фамилия" field={lastName} />
+            <Input label="Пароль" type="password" field={password} />
+            <Input label="Повторите пороль" type="password" field={confirmPassword} />
+            <Input label="Email" type="text" field={email} />
+            <div className="field">
+              <label />
+              <button className="btn btn_accent mw_fl" type="submit">
+                Submit
+              </button>
+            </div>
+          </form>
 
-        return (
-            <form onSubmit={this.handleSubmit}>
-                {this.error}
-                <Input label='Имя' field={name} />
-                <Input label='E-mail' field={email} />
-                <Input label='Логин' field={username} />
-                <Input label='Пароль' type='password' field={password} />
-                <button type='submit'>Submit</button>
-            </form>
-        )
-    }
+          <div className="reg__info">Some Info</div>
+        </div>
+      </div>
+    )
+  }
 }
