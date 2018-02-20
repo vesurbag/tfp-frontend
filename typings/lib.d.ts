@@ -14,10 +14,15 @@ declare global {
   const computed: typeof mobx.computed
   const runInAction: typeof mobx.runInAction
   const Link: typeof reactRouter.Link
+  const FB: FBType
   type IObservableArray<T> = mobx.IObservableArray<T>
 
   // Custom Example
   type Stage = 'dev' | 'prod'
+
+  type FBType = {
+    getLoginStatus: () => any
+  }
 
   interface Money {
     amount: number

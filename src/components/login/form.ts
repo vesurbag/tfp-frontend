@@ -1,5 +1,5 @@
 import { Form } from 'core/form'
-import { http } from 'core/http'
+import { user } from 'core'
 
 export class LoginForm extends Form {
   submit() {
@@ -8,6 +8,6 @@ export class LoginForm extends Form {
     }
 
     const data = this.serialize()
-    return http.post('users/authenticate', data).then(({ data }) => data)
+    return user.authenticate(data)
   }
 }

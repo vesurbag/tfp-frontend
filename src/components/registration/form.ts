@@ -1,4 +1,4 @@
-import { http } from 'core/http'
+import { user } from 'core'
 import { Form } from 'core/form'
 
 export class RegistrationForm extends Form {
@@ -8,9 +8,6 @@ export class RegistrationForm extends Form {
     }
     const data = this.serialize()
 
-    return http
-      .post('users/register', data)
-      .then(data => console.log(data.data))
-      .catch(() => false)
+    return user.register(data)
   }
 }

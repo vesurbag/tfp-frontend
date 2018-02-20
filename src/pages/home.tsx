@@ -1,4 +1,4 @@
-import { Header } from 'components/header'
+import { MainTemplate } from './templates'
 
 interface Props {
   path?: string
@@ -6,12 +6,6 @@ interface Props {
 
 export class HomePage extends Component<Props, {}> {
   render() {
-    return (
-      <div>
-        <Header />
-        <Link to="registration">Register</Link>
-        <Link to="login">Login</Link>
-      </div>
-    )
+    return <MainTemplate>Hello, i'm main page</MainTemplate>
   }
 }

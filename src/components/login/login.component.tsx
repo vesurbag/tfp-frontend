@@ -1,5 +1,4 @@
 import { Input, Field, IFormFields } from 'core/form'
-import { UserStore } from 'core/user'
 import { LoginForm } from './form'
 
 interface ILoginFields extends IFormFields {
@@ -7,12 +6,10 @@ interface ILoginFields extends IFormFields {
   password: Field
 }
 
-interface Props {
-  user?: UserStore
-}
+interface Props {}
 
-@observer(['user'])
-export class Login extends Component<Props, {}> {
+@observer
+export class LoginComponent extends Component<Props, {}> {
   fields: ILoginFields
   form: LoginForm
 
@@ -33,8 +30,7 @@ export class Login extends Component<Props, {}> {
   async handleSubmit(event: any) {
     event.preventDefault()
     const response = await this.form.submit()
-
-    response.success && this.props.user && this.props.user.login(response.token)
+    console.log(response)
   }
 
   render() {

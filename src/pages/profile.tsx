@@ -1,22 +1,22 @@
-import { http } from 'core/http'
-import { CONFIG } from 'core/config'
+import { MainTemplate } from './templates'
 
-import { UserStore } from 'core/user'
+import { UserInfoComponent } from 'components/user-info'
 
 interface Props {
-  params: any
-  user?: UserStore
+  match?: any
 }
 
 export class ProfilePage extends Component<Props, {}> {
-  componentWillMount() {
-    http.get('users/profile', {
-      headers: { Authorization: localStorage.getItem(CONFIG.nameKeyToken) },
-    })
-  }
+  componentWillMount() {}
 
   render() {
-    console.log(this.props)
-    return <div>asd</div>
+    const { params } = this.props.match
+    return (
+      <MainTemplate>
+        <div className="layout__container">
+          <UserInfoComponent userPublicId={params.id} />
+        </div>
+      </MainTemplate>
+    )
   }
 }

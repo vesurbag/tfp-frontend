@@ -1,15 +1,12 @@
-import { Input, Field } from 'core/form'
-import { UserStore } from 'core/user'
+import { history } from 'core'
+import { Input, Field, validators } from 'core/form'
 import { IRegistrationFields } from './fields'
 import { RegistrationForm } from './form'
-import { validators } from 'core/form'
 
-interface Props {
-  user?: UserStore
-}
+interface Props {}
 
 @observer
-export class Registration extends Component<Props, {}> {
+export class RegistrationComponent extends Component<Props, {}> {
   fields: IRegistrationFields
   form: RegistrationForm
   @observable error: string
@@ -21,6 +18,7 @@ export class Registration extends Component<Props, {}> {
   }
 
   componentWillMount() {
+    console.log(FB.getLoginStatus)
     const { maxLength, minLength, required, compared } = validators
     this.fields = {
       firstName: new Field(required(), minLength(2)),
@@ -38,8 +36,10 @@ export class Registration extends Component<Props, {}> {
 
   async handleSubmit(event: any) {
     event.preventDefault()
-    const isSuccess = await this.form.submit()
-    console.log(isSuccess)
+    const response = await this.form.submit()
+    if (response.success) {
+      history.push('/login')
+    }
   }
 
   render() {

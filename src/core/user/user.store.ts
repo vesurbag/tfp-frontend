@@ -1,5 +1,5 @@
-import { CONFIG } from 'core/config'
 import { http } from 'core/http'
+import { CONFIG } from 'core/config'
 
 // import { IRegistrationFields } from 'components/registration'
 
@@ -7,31 +7,55 @@ import { http } from 'core/http'
 
 export class UserStore {
   @observable isAuth: boolean = false
-  token: string
-  id: number
-  email: string
+  authToken: string | null = null
+  publicId: number | null = null
 
   constructor() {
     this.checkAuth()
   }
 
-  @action
   checkAuth() {
     const token = localStorage.getItem(CONFIG.nameKeyToken)
-    token && http.get('users/profile', {
-      headers: { Authorized: token },
-    })
-    return false
-
+    if (token) {
+      http
+        .get('users/authenticate/check', {
+          headers: { Authorization: token },
+        })
+        .then(({ data }) => {
+          this.updateData(true, token, data.publicId)
+        })
+        .catch(() => {
+          console.error('Not Authorized by token')
+          this.isAuth = false
+        })
+    } else {
+      this.isAuth = false
+    }
   }
 
-  login(token: string) {
-    localStorage.setItem(CONFIG.nameKeyToken, token)
-    this.checkAuth()
+  register(user: any) {
+    return http.post('users/register', user).then(({ data }) => data)
+  }
+
+  authenticate(user: any) {
+    return http.post('users/authenticate', user).then(({ data }) => {
+      if (data.success) {
+        localStorage.setItem(CONFIG.nameKeyToken, data.token)
+        this.updateData(true, data.token, data.user.publicId)
+      }
+      return data
+    })
   }
 
   logout() {
-    localStorage.removeItem(CONFIG.nameKeyToken)
-    this.checkAuth()
+    localStorage.clear()
+    this.updateData(false, null, null)
+  }
+
+  @action
+  updateData(isAuth: boolean, token: string | null, publicId: number | null) {
+    this.isAuth = isAuth
+    this.authToken = token
+    this.publicId = publicId
   }
 }

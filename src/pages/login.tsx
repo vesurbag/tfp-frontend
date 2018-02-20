@@ -1,17 +1,15 @@
-import { Header } from 'components/header'
-import { Login } from 'components/login'
+import { LoginComponent } from 'components/login'
+
+import { MainTemplate } from './templates'
 
 export class LoginPage extends Component<{}, {}> {
   render() {
     return (
-      <div>
-        <div className="layout__max">
-          <Header />
-        </div>
+      <MainTemplate>
         <div className="layout__container">
-          <Login />
+          <LoginComponent />
         </div>
-      </div>
+      </MainTemplate>
     )
   }
 }
