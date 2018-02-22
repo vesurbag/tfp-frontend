@@ -18,11 +18,10 @@ export class RegistrationComponent extends Component<Props, {}> {
   }
 
   componentWillMount() {
-    console.log(FB.getLoginStatus)
     const { maxLength, minLength, required, compared } = validators
     this.fields = {
-      firstName: new Field(required(), minLength(2)),
-      lastName: new Field(required(), minLength(5), maxLength(25)),
+      firstName: new Field(required(), minLength(2), maxLength(25)),
+      lastName: new Field(),
       email: new Field(required()),
       password: new Field(required()),
       confirmPassword: new Field(required()),
@@ -47,23 +46,24 @@ export class RegistrationComponent extends Component<Props, {}> {
 
     return (
       <div className="block">
+        <h1 className="reg__heading global__heading">Регистрация - шаг 1</h1>
         <div className="reg__wrapper">
           <form className="reg__form" onSubmit={this.handleSubmit}>
             {this.error}
-            <Input label="Имя" field={firstName} />
+            <Input label="Имя *" field={firstName} />
             <Input label="Фамилия" field={lastName} />
-            <Input label="Пароль" type="password" field={password} />
-            <Input label="Повторите пороль" type="password" field={confirmPassword} />
-            <Input label="Email" type="text" field={email} />
+            <Input label="Пароль *" type="password" field={password} />
+            <Input label="Повторите пороль *" type="password" field={confirmPassword} />
+            <Input label="Email *" type="text" field={email} />
             <div className="field">
               <label />
               <button className="btn btn_accent mw_fl" type="submit">
-                Submit
+                Продолжить
               </button>
             </div>
           </form>
 
-          <div className="reg__info">Some Info</div>
+          <div className="reg__info">Поля отмеченные звездочкой обязатенльы для заполнения (*)</div>
         </div>
       </div>
     )

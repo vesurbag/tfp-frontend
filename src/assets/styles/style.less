@@ -14,6 +14,7 @@ body {
     font-family: @font_family; 
     font-size: 13px;
     font-weight: 400;
+    color: @color_text_dark;
 }
 
 a {
@@ -52,7 +53,7 @@ input {
         text-align: right;
         display: block;
     }
-    .field__error_msg {
+    &__error_msg {
         position: absolute;
         bottom: -13px;
         font-size: 11px;
@@ -114,7 +115,7 @@ input {
 }
 
 .layout__container {
-    width: 1600px;
+    width: 1400px;
 }
 
 .layout__max {
@@ -146,37 +147,59 @@ input {
     display: flex;
     padding: 0 15px;
     width: 100%;
-    .header__logo {
+
+    &__logo {
 
     }
-    .header__nav {
+
+    &__nav {
         display: flex;
         flex: 1;
         margin-left: 15px;
-        .header__item {
-            .header__link {
-                display: block;
-                line-height: 50px;
-                color: @color_text_light;
-                padding: 0 10px;
-                &:hover {
-                    background-color: @color_main_light;
-                }
-            }
+    }
+
+    &__item {
+        
+    }
+
+    &__link {
+        display: block;
+        line-height: 50px;
+        color: @color_text_light;
+        padding: 0 10px;
+        &:hover {
+            background-color: @color_main_light;
         }
     }
 }
 
 // Registration 
 
-.reg__wrapper {
-    display: flex;
-    .reg__form {
+.reg {
+    &__wrapper {
+        display: flex;
+    }
+    
+    &__form {
         flex: 1;
     }
-    .reg__info {
+
+    &__info {
         flex: 1;
         margin-left: 15px;
+    }
+
+
+}
+
+// Global
+
+.global {
+    &__heading {
+        font-size: 32px;
+        margin-left: 135px;
+        margin-bottom: 15px;
+        font-weight: 300;
     }
 }
 
