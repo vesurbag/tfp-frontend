@@ -6,7 +6,7 @@ import { RegistrationForm } from './form'
 interface Props {}
 
 @observer
-export class RegistrationComponent extends Component<Props, {}> {
+export class RegistrationStepOneComponent extends Component<Props, {}> {
   fields: IRegistrationFields
   form: RegistrationForm
   @observable error: string

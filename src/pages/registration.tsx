@@ -1,5 +1,3 @@
-import { RegistrationComponent } from 'components/registration'
-
 import { MainTemplate } from './templates'
 
 interface Props {
@@ -11,7 +9,7 @@ export class RegistrationPage extends Component<Props, {}> {
     return (
       <MainTemplate>
         <div className="layout__container">
-          <RegistrationComponent />
+          {this.props.children}
           <div className="block">123</div>
         </div>
         <div className="layout__container horizontal">
