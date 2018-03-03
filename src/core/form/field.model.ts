@@ -11,9 +11,8 @@ export class Field {
   }
 
   @action
-  onChange(event: any) {
-    event.preventDefault()
-    this.value = event.currentTarget.value
+  onChange(value: string) {
+    this.value = value
     this.checkValid()
   }
 

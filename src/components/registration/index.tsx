@@ -1,1 +1,1 @@
-export { RegistrationStepOneComponent } from './step-1'
+export { RegistrationComponent } from './registration.component'

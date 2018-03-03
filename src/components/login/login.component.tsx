@@ -1,4 +1,5 @@
 import { Input, Field, IFormFields } from 'core/form'
+import { required } from 'core/form/validators'
 import { LoginForm } from './form'
 
 interface ILoginFields extends IFormFields {
@@ -6,23 +7,15 @@ interface ILoginFields extends IFormFields {
   password: Field
 }
 
-interface Props {}
-
 @observer
-export class LoginComponent extends Component<Props, {}> {
+export class LoginComponent extends Component<{}, {}> {
   fields: ILoginFields
   form: LoginForm
 
-  constructor(props: Props) {
-    super(props)
-
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
   componentWillMount() {
     this.fields = {
-      email: new Field(),
-      password: new Field(),
+      email: new Field(required()),
+      password: new Field(required()),
     }
     this.form = new LoginForm(this.fields)
   }
@@ -39,7 +32,7 @@ export class LoginComponent extends Component<Props, {}> {
     return (
       <div className="block">
         <div className="reg__wrapper">
-          <form className="reg__form" onSubmit={this.handleSubmit}>
+          <form className="reg__form" onSubmit={this.handleSubmit.bind(this)}>
             <Input label="Email" type="email" field={email} />
             <Input label="Пароль" type="password" field={password} />
             <div className="field">

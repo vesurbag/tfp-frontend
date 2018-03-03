@@ -26,10 +26,10 @@ export class UserStore {
         })
         .catch(() => {
           console.error('Not Authorized by token')
-          this.isAuth = false
+          this.logout()
         })
     } else {
-      this.isAuth = false
+      this.logout()
     }
   }
 

@@ -1,0 +1,1 @@
+export { phoneMask } from './string'

@@ -6,4 +6,15 @@ export interface IRegistrationFields extends IFormFields {
   password: Field
   confirmPassword: Field
   email: Field
+  phone: Field
+  accountType: Field
+  city: Field
+
+  // Model fields
+}
+
+export interface CitiesJSON {
+  id: number
+  key: string
+  name: string
 }
